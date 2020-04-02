@@ -1,0 +1,18 @@
+version: "2"
+services:
+  application:
+    build: ./application
+    links:
+      - database
+    ports:
+      - 5000:5000
+
+  database:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: abcd
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d/:ro
+
